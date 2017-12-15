@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>圆弧进度条_canvas练习笔记</title>
+    <style>
+    	canvas {
+    		border: 1px solid #42d79f;
+    	}
+    </style>
+</head>
+
+<body style="margin: 20px;">
+  <canvas id="myCanvas" width="200" height="200">暂不支持，请切换极速模式或更新浏览器版本~</canvas>
+  <canvas id="myCanvas2" width="200" height="200">暂不支持，请切换极速模式或更新浏览器版本~</canvas>
+  
+  <script type="text/javascript">
+  	
+  	/*
+  	 * 关于canvas一些记录：
+  	 * canvas 默认width="300" height="150"(其他值时必须设置); 不能为百分比，canvas会将百分值当成数值显示
+  	 * closePath()不是结束路径，而是 关闭 路径。与beginPath()几乎没关系
+  	 * rotate 方法，它用于以初始原点(0, 0)为中心旋转，配合translate(x, y)可偏移原点。旋转后记得还原原点
+  	 * save()/restore(); 保存和恢复canvas状态(样式、变形); 状态改变只影响其后渲染的图形，已渲染图形不受影响
+  	 * isPointInStroke(x, y);用于检测某点是否在路径的描边线上
+  	 * 详细API: 
+  	 * https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D
+  	 * 
+  	 * */
+  	
+  	window.onload = function(){	
+  		
+  		//参数配置
+  		var data1 = {
+  			id: 'myCanvas', // <canvas>的id 必填
+  			max: 100,  // 最大数据（100%）必填
+  			arc: 25,    // 当前数据（圆弧）必填
+  			
+  			move: false, // 是否加载动画 true/false 默认true
+  			time: 600, // 动画时间 move为true时选填  默认300
+  			arcColor: '#fcb322', // 圆弧颜色  默认#42d79f
+  			cirColor: '#666', // 背景圆颜色  默认#999
+  			lineWidth: 15, // 线条宽度  默认20
+  			radius: 60, // 半径  默认80
+  			content: '占比25%', // 文本显示 默认空
+  			fontSize: 20, // 字体大小 默认24px
+  			fontFamily: 'microsoft yahei' // 字体  默认serif 			
+  		};
+  		// 渲染
+  		oArc(data1);
+  		
+  		var data2 = {
+  			id: 'myCanvas2', 
+  			max: 100,
+  			content: '占比60%',
+  			arc: 60
+  		};
+  		oArc(data2);		
+  	}; 	
+  	
+		function oArc(data){
+	 	 	var canvas = document.getElementById(data.id);
+	 	 	var ctx = canvas.getContext('2d');
+	 	 	
+			var radius = data.radius || 80,
+			 		x1 = canvas.width/2,
+			 		y1 = canvas.height/2,
+			 		degree = (data.arc/data.max)*360, // 圆弧角度
+			 		cText = data.content || "",
+			 		cFont = (data.fontSize || 24) + 'px ' + (data.fontFamily || 'serif');
+			
+			// 抗锯齿？？待验证
+			ctx.scale(window.devicePixelRatio, window.devicePixelRatio); 			
+			ctx.lineWidth = data.lineWidth || 20;		
+    	ctx.strokeStyle = data.arcColor || "#42d79f";
+    	
+    	rotate(270);
+    	rText(data);
+    	ctx.save();
+    	
+    	// 加载动画
+    	var animated = data.move;
+    	if(animated || animated === undefined ) {
+	    	var timer=null,i=0;
+	    	draw(data);
+    	} else {
+    		bgArc(data);
+    		ctx.restore();
+    		ctx.beginPath();
+    		ctx.arc(x1, y1, radius, 0, (Math.PI/180)*degree, false);
+		    ctx.stroke();
+    	}
+    	
+    	// 事件    	
+    	mouse(data);
+    	
+    	
+    	// 渲染背景圆
+			function bgArc(data){
+				ctx.strokeStyle = data.cirColor || "#999";
+				ctx.beginPath();
+	    	ctx.arc(x1, y1, radius, 0, Math.PI*2, false);
+	    	ctx.stroke();
+    	};
+    	
+    	// 变更起始0角度（原始为三点钟方向）
+    	function rotate(deg){
+    		ctx.translate(x1, y1); 
+    		ctx.rotate((Math.PI/180)*deg); // 设置起始点 12点钟方向 画布顺时针旋转270度
+    		ctx.translate(-x1, -y1); // 还原画布中心点为(0, 0)
+    	};
+    	
+			// 渲染文本
+    	function rText(data){
+    		rotate(90);
+    		ctx.textAlign = 'center';
+	    	ctx.textBaseline = 'middle';
+	    	ctx.font = cFont;
+	    	ctx.fillText(cText, x1, y1);
+	    	rotate(270);
+    	};
+    	
+    	function draw(data){
+	    	timer = setInterval(function(){
+	    		var moveNum = (data.time || 300)/15;
+	    		if(i < moveNum){  // 动画总渲染次数  时间/间隔
+	    			ctx.clearRect(0, 0, 2*x1, 2*y1);
+	    			bgArc(data);
+	    			rText(data);
+	    			ctx.strokeStyle = data.arcColor || "#42d79f";
+		    		ctx.beginPath();
+		    		ctx.arc(
+		    			x1,
+		    			y1,
+		    			radius,
+		    			0, 
+		    			// 1/总渲染次数  为每次渲染弧度
+		    			(Math.PI/180)*(degree)*(1/moveNum*(i+1)), 
+		    			false
+		    		);
+		    		ctx.stroke(); 
+		    		i++;
+	    		} else {
+	    			clearInterval(timer);
+	    		}
+    		},15);
+    	};
+    	
+    	function mouse(data){
+    		var inArea = false,
+    				changeStatus = false;
+   
+	    	canvas.onmousemove=function(ev){
+	    		event = ev || window.event;
+	    		
+	    		// 鼠标在canvas内的坐标
+	    		var _x = event.offsetX;	
+	 				var _y = event.offsetY;
+	 				
+	 				if(ctx.isPointInStroke(_x, _y)){
+	 					
+	 					// css样式处理
+	 					canvas.style.cursor = 'pointer';
+	 					
+	 					// 鼠标第一次移入
+	 					if( !inArea ){
+			    		ctx.lineWidth = (data.lineWidth + 5) || 25;
+			    		ctx.strokeStyle = data.arcColor || "#42d79f";
+			    		
+			    		ctx.beginPath();
+			    		ctx.arc(x1, y1, radius, 0, (Math.PI/180)*degree, false);
+					    ctx.stroke();
+					    
+					    // 第一次进入，图形状态改变
+					    changeStatus = true; 
+	 					}
+	 					// 鼠标移入区域后修改状态，表示非第一次进入（已在区域内）
+	 					inArea = true;
+					} else {
+	       		canvas.style.cursor = 'default';
+	       		
+	       		// 鼠标移出，渲染还原
+	       		if(changeStatus){
+	       			ctx.clearRect(0, 0, 2*x1, 2*y1);
+	       			ctx.lineWidth = (data.lineWidth) || 20;
+	       			bgArc(data);
+	       			rText(data);
+	       			ctx.strokeStyle = data.arcColor || "#42d79f";
+			    		ctx.beginPath();
+			    		ctx.arc(x1, y1, radius, 0, (Math.PI/180)*degree, false);
+					    ctx.stroke();
+					   
+					   // 重置状态
+					    inArea = false; 
+	       		}
+	        }
+	    	}	
+    	};	
+  	}
+		
+  </script>
+</body>
+
+</html>
