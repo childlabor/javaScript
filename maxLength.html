@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>兼容IE9以下textarea的maxlength属性</title>
+	</head>
+	<body>
+		<input type="text" maxlength="10" />
+		<textarea name="a" maxlength="10" onpropertychange="maxInputLen(this, 10)"></textarea>
+		<script>
+			// 限制输入框最大字数obj=this,i最大字数，onpropertychange调用。 (IE8/9,其他标签内属性maxlength)
+			function maxInputLen(obj, i){
+				var V = obj.value;
+				if(V.length > i) {
+				// 从0下标开始取i位  或者substring(0,i)
+				var newV = 	V.substr(0,i); 
+				obj.value = newV;
+				}
+			};
+		</script>
+	</body>
+</html>
