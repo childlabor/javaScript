@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<style>
+			.wrap {
+				padding: .2rem 0 .2rem .2rem;
+			}
+			.a {
+				width: 3.5rem;
+				height: 3.5rem;
+				margin-right: .1rem;
+				margin-bottom: .1rem;
+				border: .01rem solid #c9c9c9;
+				float: left;
+			}
+			img {
+				width: 100%;
+				height: 100%;
+			}
+			.wrap img {
+				background: #fff url(images/loading.gif) no-repeat center center;
+				background-size: 15%;
+			}
+			.loaded {
+				border: .01rem solid red;
+			}
+			.layer {
+				display: none;
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				margin-left: -1.75rem;
+				margin-top: -1.75rem;
+				width: 3.5rem;
+				height: 3.5rem;
+				box-shadow: 0 0 20px red;
+				transform: rotateZ(-15deg);
+			}
+			
+			.ul {
+				width: 3.5rem;
+				height: 7rem;
+				padding: .1rem;
+				margin: .1rem auto;
+				border: 1px solid #42d79f;
+				overflow-y: auto;
+				overflow-x: hidden;
+				-webkit-overflow-scrolling: touch;
+			}
+			.horiz {
+				width: 7rem;
+				height: 3.5rem;
+				border: 1px solid #42d79f;
+				padding: .1rem;
+				overflow-x: auto;
+				overflow-y: hidden;
+				-webkit-overflow-scrolling: touch;
+			}
+			
+			.ul-horiz {
+    		border: 1px solid #fcb322;
+    		width: 72rem;
+    		height: 3.5rem;
+    		padding-right: .1rem;
+			}
+			.li {
+				width: 3.5rem;
+				height: 3.5rem;
+				margin-top: .1rem;
+			}
+			.horiz .li {
+				float: left;
+				margin-top: 0;
+				margin-left: .1rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="a btn">
+				<img data-echo="images/ (1).jpg" src="images/blank.gif" alt="1" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (2).jpg" src="images/blank.gif" alt="2" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (3).jpg" src="images/blank.gif" alt="3" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (4).jpg" src="images/blank.gif" alt="4" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (5).jpg" src="images/blank.gif" alt="5" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (6).jpg" src="images/blank.gif" alt="6" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (7).jpg" src="images/blank.gif" alt="7" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (8).jpg" src="images/blank.gif" alt="8" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (9).jpg" src="images/blank.gif" alt="9" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (10).jpg" src="images/blank.gif" alt="10" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (11).jpg" src="images/blank.gif" alt="11" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (12).jpg" src="images/blank.gif" alt="12" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (13).jpg" src="images/blank.gif" alt="13" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (14).jpg" src="images/blank.gif" alt="14" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (15).jpg" src="images/blank.gif" alt="15" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (16).jpg" src="images/blank.gif" alt="16" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (17).jpg" src="images/blank.gif" alt="17" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (18).jpg" src="images/blank.gif" alt="18" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (19).jpg" src="images/blank.gif" alt="19" />
+			</div>
+			<div class="a">
+				<img data-echo="images/ (20).jpg" src="images/blank.gif" alt="20" />
+			</div>
+			
+			<ul class="ul">
+				<li class="li">
+					<img data-echo="images/ (1).jpg" src="images/blank.gif" alt="1" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (2).jpg" src="images/blank.gif" alt="2" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (3).jpg" src="images/blank.gif" alt="3" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (4).jpg" src="images/blank.gif" alt="4" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (5).jpg" src="images/blank.gif" alt="5" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (6).jpg" src="images/blank.gif" alt="6" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (7).jpg" src="images/blank.gif" alt="7" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (8).jpg" src="images/blank.gif" alt="8" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (9).jpg" src="images/blank.gif" alt="9" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (10).jpg" src="images/blank.gif" alt="10" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (11).jpg" src="images/blank.gif" alt="11" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (12).jpg" src="images/blank.gif" alt="12" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (13).jpg" src="images/blank.gif" alt="13" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (14).jpg" src="images/blank.gif" alt="14" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (15).jpg" src="images/blank.gif" alt="15" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (16).jpg" src="images/blank.gif" alt="16" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (17).jpg" src="images/blank.gif" alt="17" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (18).jpg" src="images/blank.gif" alt="18" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (19).jpg" src="images/blank.gif" alt="19" />
+				</li>
+				<li class="li">
+					<img data-echo="images/ (20).jpg" src="images/blank.gif" alt="20" />
+				</li>
+			</ul>
+			
+			<div class="horiz">
+				<ul class="ul-horiz">
+					<li class="li">
+						<img data-echo="images/ (1).jpg" src="images/blank.gif" alt="1" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (2).jpg" src="images/blank.gif" alt="2" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (3).jpg" src="images/blank.gif" alt="3" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (4).jpg" src="images/blank.gif" alt="4" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (5).jpg" src="images/blank.gif" alt="5" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (6).jpg" src="images/blank.gif" alt="6" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (7).jpg" src="images/blank.gif" alt="7" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (8).jpg" src="images/blank.gif" alt="8" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (9).jpg" src="images/blank.gif" alt="9" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (10).jpg" src="images/blank.gif" alt="10" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (11).jpg" src="images/blank.gif" alt="11" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (12).jpg" src="images/blank.gif" alt="12" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (13).jpg" src="images/blank.gif" alt="13" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (14).jpg" src="images/blank.gif" alt="14" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (15).jpg" src="images/blank.gif" alt="15" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (16).jpg" src="images/blank.gif" alt="16" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (17).jpg" src="images/blank.gif" alt="17" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (18).jpg" src="images/blank.gif" alt="18" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (19).jpg" src="images/blank.gif" alt="19" />
+					</li>
+					<li class="li">
+						<img data-echo="images/ (20).jpg" src="images/blank.gif" alt="20" />
+					</li>
+				</ul>
+			</div>
+
+		</div>
+		
+		<div class="layer">
+			<div class="a">
+				<img data-echo="images/ (10).jpg" src="images/blank.gif" alt="101" />
+			</div>
+		</div>
+	<script type="text/javascript" src="js/flexible.js"></script>
+	<script type="text/javascript" src="js/echo.min.js"></script>
+	<script>
+		window.onload = function(){
+			var oBtn = document.querySelector(".btn");
+			var oLay = document.querySelector(".layer");
+			var oUl = document.querySelector(".ul");
+			var oHoriz = document.querySelector(".horiz");
+			
+			oBtn.onclick = function(){
+				oLay.style.display = "block";
+				echo.render(); // 无需滚动但是需要加载时
+			}
+			
+			oUl.onscroll = function(){
+				echo.render();
+			}
+			
+			oHoriz.onscroll = function(){
+				echo.render();
+			}
+		}
+		
+		// 初始化懒加载
+	 	echo.init({
+	    offset: 100, // 加载偏移量（距可视区）
+	    throttle: 100, // scroll节流 默认250
+	    callback: function(element, op) {
+	    	// 对加载(load)的元素做一些js处理
+		    if(op === 'load') {
+		      element.classList.add('loaded');
+		    } else {
+		      element.classList.remove('loaded');
+		    }
+		  }
+	  });
+	</script>
+	</body>
+</html>
