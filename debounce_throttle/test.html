@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>节流and防抖总结测试页</title>
+	<style>
+		.demo {
+			float: left;
+			width: 200px;
+			height: 200px;
+			border: 1px dashed #42d79f;
+			margin: 10px;
+			padding: 5px;
+		}
+	</style>
+</head>
+
+<body style="margin: 20px; font-size: 16px;">
+	<p>打开console面板，鼠标在框内移动（mousemove）测试；点击鼠标初始化</p>
+	<p>应用场景辨析：<a href="https://github.com/hanzichi/underscore-analysis/issues/20" target="_blank">https://github.com/hanzichi/underscore-analysis/issues/20</a></p>
+
+	<div class="demo" id="demo0">未节流和防抖</div>	
+	<div class="demo" id="demo1">基础防抖，定时器实现。移动停止100ms后执行</div>
+	<div class="demo" id="demo2">防抖基础版2，通过返回闭包的形式。移动停止100ms后执行</div>
+	<div class="demo" id="demo3">防抖升级版3，通过返回闭包的形式。第三个参数为true时，在移动开始就执行。（underscore.js）</div>
+	<div class="demo" id="demo4">节流基础版</div>
+	<div class="demo" id="demo5">节流升级版: (假设A为移动开始点B为移动间隔时间结束点)。{ leading: false }执行时间点顺序  B, B, B, B ……</div>
+	<div class="demo" id="demo6">节流升级版：{ trailing: false }执行时间点顺序 A, A, A, A ……;第三个参数不带则为： A, B, B, B ……</div>
+	
+	<script src="demo.js"></script>
+</body>
+
+</html>
