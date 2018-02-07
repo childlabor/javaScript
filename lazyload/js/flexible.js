@@ -70,7 +70,7 @@
         if (width / dpr > 540) {
             width = 540 * dpr;
         }
-        var rem = width / 7.5;
+        var rem = width / 7.5; // 根据设计稿修改 （设计稿尺寸/100基数）
         docEl.style.fontSize = rem + 'px';
         flexible.rem = win.rem = rem;
     }
